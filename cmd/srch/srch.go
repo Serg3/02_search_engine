@@ -21,7 +21,7 @@ func main() {
 			}
 		}
 	} else {
-		fmt.Println("Flag required!")
+		flag.PrintDefaults()
 	}
 }
 

@@ -27,6 +27,7 @@ func main() {
 
 // Function scan() uses package 'crawler'
 // to search through Go sites by word
+// and returs []crawler.Document result
 func scan() (docs []crawler.Document) {
 	scn := spider.New()
 	const depth = 2

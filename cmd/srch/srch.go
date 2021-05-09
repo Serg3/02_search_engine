@@ -29,10 +29,10 @@ func main() {
 // to search through Go sites by word
 func scan() (docs []crawler.Document) {
 	scn := spider.New()
-	const dep = 2
+	const depth = 2
 	urls := []string{"https://golang.org", "https://go.dev"}
 	for _, url := range urls {
-		res, err := scn.Scan(url, dep)
+		res, err := scn.Scan(url, depth)
 		if err != nil {
 			log.Println(err)
 			continue

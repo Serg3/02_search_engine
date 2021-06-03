@@ -14,25 +14,25 @@ type crwDocs []crawler.Document
 // for a more convenient representation
 // of storages's parameters
 type Storage struct {
-	cntr int
-	docs crwDocs
-	ind  map[uint32][]int
+	counter int
+	docs    crwDocs
+	ind     map[uint32][]int
 }
 
 // New creates a new storage instance
 func New() *Storage {
 	return &Storage{
-		cntr: 0,
-		docs: make(crwDocs, 0),
-		ind:  make(map[uint32][]int, 50),
+		counter: 0,
+		docs:    make(crwDocs, 0),
+		ind:     make(map[uint32][]int),
 	}
 }
 
 // Append adds document to the storage
 func (s *Storage) Append(docs []crawler.Document) {
 	for _, d := range docs {
-		s.cntr++
-		d.ID = s.cntr
+		s.counter++
+		d.ID = s.counter
 		s.docs = append(s.docs, d)
 		s.index(d.ID, d.Title)
 	}

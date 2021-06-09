@@ -23,7 +23,7 @@ func main() {
 	flag.Parse()
 	if *param != "" {
 		docs := scan().Search(param)
-		fmt.Println("Search results:")
+		fmt.Printf("Search results:\n\n")
 		for _, d := range docs {
 			fmt.Println(d)
 		}
@@ -37,15 +37,22 @@ func main() {
 // and returs sorted *index.Storage result
 func scan() *index.Storage {
 	s := new()
-	for _, url := range s.sites {
-		res, err := s.scanner.Scan(url, s.depth)
-		if err != nil {
-			log.Println(err)
-			continue
+
+	if s.storage.Empty() {
+		for _, url := range s.sites {
+			res, err := s.scanner.Scan(url, s.depth)
+			if err != nil {
+				log.Println(err)
+				continue
+			}
+			s.storage.Append(res)
 		}
-		s.storage.Append(res)
+		s.storage.Save()
 	}
+
+	s.storage.Index()
 	s.storage.Sort()
+
 	return s.storage
 }
 

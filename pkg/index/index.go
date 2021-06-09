@@ -61,7 +61,6 @@ func (s *Storage) Append(docs []crawler.Document) {
 		s.counter++
 		d.ID = s.counter
 		s.docs = append(s.docs, d)
-		s.index(d.ID, d.Title)
 	}
 }
 
@@ -84,6 +83,12 @@ func (s *Storage) Search(param *string) []string {
 	}
 
 	return res
+}
+
+func (s *Storage) Index() {
+	for _, d := range s.docs {
+		s.index(d.ID, d.Title)
+	}
 }
 
 func (s *Storage) Sort() {

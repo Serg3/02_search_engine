@@ -47,9 +47,11 @@ func scan() *index.Storage {
 			}
 			s.storage.Append(res)
 		}
-		s.storage.Sort()
 		s.storage.Save()
 	}
+
+	s.storage.Index()
+	s.storage.Sort()
 
 	return s.storage
 }
